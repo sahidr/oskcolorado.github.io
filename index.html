@@ -1,91 +1,36 @@
-<!DOCTYPE html>
-<html ng-app="scrum">
-    <head><title>scrum</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="css/bsPerso.css">
-        <link rel="stylesheet" href="css/angular/ngDialog.min.css">
-        <link rel="stylesheet" href="css/angular/ngDialog-theme-default.min.css">
-        <link rel="stylesheet" href="css/angular/ng-table.min.css">
-        <link rel="stylesheet" href="css/app/style.css">
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!--[if lt IE 9]>
-        <script src="js/html5shiv.js"></script>
-        <script src="js/respond.min.js"></script>
-        <![endif]-->
-    </head>
-<body ng-controller="scrumController_">
-    <div class="container">
-        <flash:messages class="alert-perso"></flash:messages>
-        <div ng-view class="fade"></div>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" 
+                    data-toggle="collapse" 
+                    data-target="#contenido-plegable">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" >APMWSC</span>
+        </div>
+        <div class="collapse navbar-collapse" id="contenido-plegable">
+            <ul class="nav navbar-nav navbar-left">
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+<li class="navbar-text" ng-show="usuario.nombre" ng-bind="usuario.nombre"></li>
+<li><a ng-click="VRegistro1()">
+    Registrarse</a></li>
+
+            </ul>
+        </div>
     </div>
-    <footer class="footer">
-      <div class="container">
-          <div class="row">
-              <div class="col-xs-12" style="background-color: #333333; height: 2px;"></div>
-          </div>
-          <div class="row">
-              <div class="col-xs-10 text-inverse" ng-bind="title"></div>
-              <div class="col-xs-2" style="text-align: right"><img alt="Logo" src="img/logo.png" height="30" /></div>
-          </div>
-      </div>
-    </footer>
-    <!-- LOAD JQUERY -->
-    <script src="js/jquery-1.11.2.min.js"></script>
-    <script src="js/d3.v3.min.js"></script>
+</nav>
 
-    <!-- LOAD ANGULAR -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/angular/angular.min.js"></script>
-    <script src="js/angular/angular-animate.min.js"></script>
-    <script src="js/angular/angular-route.min.js"></script>
-    <script src="js/angular/angular-resource.min.js"></script>
-    <script src="js/angular/textAngular-sanitize.min.js"></script>
-    <script src="js/angular/textAngular.min.js"></script>
-    <script src="js/jquery.layout-latest.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/angular/ng-flash.js"></script>
-    <!-- LOAD APP -->
-    <script src="js/app/app.js"></script>
-    <script src="js/app/ident/IdentService.js"></script>
-    <script src="js/app/ident/IdentController.js"></script>
-    <script src="js/app/prod/ProdService.js"></script>
-    <script src="js/app/prod/ProdController.js"></script>
-    <script src="js/app/mast/MastService.js"></script>
-    <script src="js/app/mast/MastController.js"></script>
-    <script src="js/app/dev/DevService.js"></script>
-    <script src="js/app/dev/DevController.js"></script>
-    <script src="js/app/actor/ActorService.js"></script>
-    <script src="js/app/actor/ActorController.js"></script>
-    <script src="js/app/objetivo/ObjetivoService.js"></script>
-    <script src="js/app/objetivo/ObjetivoController.js"></script>
-    <script src="js/app/accion/AccionService.js"></script>
-    <script src="js/app/accion/AccionController.js"></script>
-    <script src="js/app/historias/HistoriasService.js"></script>
-    <script src="js/app/historias/HistoriasController.js"></script>
+    <form name="fLoginForm" ng-submit="AIdentificar0(fLoginForm.$valid)" novalidate>
+            <div class="form-group" ng-class="{ 'has-error' :  fLoginSubmitted && fLoginForm.usuario.$invalid && fLoginForm.usuario.$pristine && fLoginSubmitted}"><label for="fLogin_usuario">Usuario</label><input id="fLogin_usuario" type="text" name="usuario" class="form-control" ng-model="fLogin.usuario" placeholder="Usuario" required ng-minlength="1"/><p ng-show="fLoginSubmitted && fLoginForm.usuario.$invalid" class="help-block">Error en campo Usuario.</p></div>
+            <div class="form-group" ng-class="{ 'has-error' :  fLoginSubmitted && fLoginForm.clave.$invalid && fLoginForm.clave.$pristine && fLoginSubmitted}"><label for="fLogin_clave">Clave</label><input id="fLogin_clave" type="password" name="clave" class="form-control" ng-model="fLogin.clave" placeholder="Clave" required ng-minlength="1"/><p ng-show="fLoginSubmitted && fLoginForm.clave.$invalid" class="help-block">Error en campo Clave.</p></div>
+        <button type="submit" class="btn btn-perso btn-lg btn-block">
+            <span class="glyphicon glyphicon-flash"></span>Conectarse
+        </button>
+    </form>
+    <hr />
 
-    <!-- LOAD NGTABLE -->
-    <script src="js/angular/ng-table.min.js"></script>
-<script type="text/ng-template" id="pager.html">
-<ul class="pager ng-cloak" ng-show="pages.length>1">
-    <li ng-repeat="page in pages"
-          ng-class="{'disabled': !page.active, 'previous': page.type == 'prev', 'next': page.type == 'next'}"
-          ng-show="page.type == 'prev' || page.type == 'next'" ng-switch="page.type">
-      <a ng-switch-when="prev" ng-click="params.page(page.number)" href="">&laquo; Previous</a>
-      <a ng-switch-when="next" ng-click="params.page(page.number)" href="">Next &raquo;</a>
-    </li>
-      <li> 
-      <div class="btn-group">
-          <button type="button" ng-class="{'active':params.count() == 10}" ng-click="params.count(10)" class="btn btn-default">10</button>
-          <button type="button" ng-class="{'active':params.count() == 25}" ng-click="params.count(25)" class="btn btn-default">25</button>
-          <button type="button" ng-class="{'active':params.count() == 50}" ng-click="params.count(50)" class="btn btn-default">50</button>
-          <button type="button" ng-class="{'active':params.count() == 100}" ng-click="params.count(100)" class="btn btn-default">100</button>
-      </div>
-      </li>
-  </ul>
-</script>
 
-</body>
-</html>
+<div id="right"></div>
