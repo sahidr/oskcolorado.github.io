@@ -1,0 +1,12 @@
+{
+  "name": "8Joincic",
+  "description": "Mesa de trabajo",
+  "launch_path": "/index.html",
+  "icons": {
+    "128": "/img/icon-128.png"
+  },
+  "version": "0.1",
+  "developer": {
+    "name": "WitSoft"
+  }
+}
